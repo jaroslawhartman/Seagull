@@ -1454,6 +1454,13 @@ int C_ScenarioControl::add_actions (C_XmlData                *P_msgData,
 
 	case E_ACTION_SCEN_STOP_TIMER :
 	  (*P_data_mesure) = true ;
+	  
+	  L_actionArg = L_action -> find_value((char*) "name");
+
+	  if (L_actionArg != NULL) {
+	      L_actionData -> m_args = L_actionArg ;
+      }
+      
 	  break ;
 
 	case E_ACTION_SCEN_CLOSE :

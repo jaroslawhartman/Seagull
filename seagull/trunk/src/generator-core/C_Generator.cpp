@@ -1149,7 +1149,7 @@ T_GeneratorError C_Generator::InitProcedure() {
 	  m_scen_control->set_data_log_controller(m_data_log_control);
 	  m_data_log_control->init();
 	  if (L_data_rtdistrib == 0) {
-	    if (m_data_log_control->data((char*)"time-ms;response-time-ms;") == 0) {
+	    if (m_data_log_control->data((char*)"time-ms;response-time-ms;tag") == 0) {
 	      GEN_ERROR(E_GEN_FATAL_ERROR, "Internal error");
 	      L_genError = E_GEN_FATAL_ERROR ;
 	    }

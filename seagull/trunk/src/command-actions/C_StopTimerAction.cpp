@@ -50,11 +50,22 @@ T_exeCode    C_StopTimerAction::execute(T_pCmd_scenario P_pCmd,
                 &P_callCtxt->m_start_time);
   m_controllers.m_stat->executeStatAction (C_GeneratorStats::E_ADD_RESPONSE_TIME_DURATION,
                              L_time_ms) ;
+
+  // Populate statistics log either with Current and Response time 
+  // or additionally with a tag passed in <stop-timer name="<tag>"> 
+
   if (m_controllers.m_log) {
-    m_controllers.m_log->time_data(&P_callCtxt->m_start_time, 
-                     &P_callCtxt->m_current_time);
+    if(m_args == NULL) {
+        m_controllers.m_log->time_data(&P_callCtxt->m_start_time, 
+                        &P_callCtxt->m_current_time);
+    }
+    else {
+        m_controllers.m_log->time_data(&P_callCtxt->m_start_time, 
+                        &P_callCtxt->m_current_time, m_args);     
+    }
   }
 
+  
   if (m_controllers.m_rsp_time_log)
   {
     m_controllers.m_rsp_time_log->LogRspTimeInfo(P_callCtxt, P_msg, P_ref, L_time_ms);

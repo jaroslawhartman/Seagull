@@ -1411,11 +1411,11 @@ for further details based on examples.
         <p/>
         <p>If data-log-rtdistrib is not defined in the configuration file, then the response time 
 	  statistics look like:</p>
-        <source><![CDATA[time-ms;response-time-ms;
-2210.899902;2159.582000;
-3204.348877;2203.527000;
-4124.591064;2123.738000;
-5150.986084;2150.094000;
+        <source><![CDATA[time-ms;response-time-ms;tag
+2210.899902;2159.582000;CCR-I
+3204.348877;2203.527000;CCR-U
+4124.591064;2123.738000;CCR-I
+5150.986084;2150.094000;CCR-T
 6124.566895;2123.638000;
 7190.973877;2186.730000;
 8151.060059;2150.058000;
@@ -1429,6 +1429,7 @@ for further details based on examples.
 16201.378906;2196.880000;
 17151.288086;2149.990000;]]></source>
         <p>where the response-time-ms values correspond to the average response time since the previous statistics response time has been logged.</p>
+        <p>A tag is populated from an optional stop-timer attribute name.</p>
         <p>If all data-log-* parameters are defined in the configuration file, then the response time 
 	  statistics look like:</p>
         <source><![CDATA[Dump Periodic;
@@ -3128,7 +3129,9 @@ Command line syntax of /usr/local/bin/plotstat.ksh - options
             <th>&nbsp;</th>
             <th>Start the timer for <a href="#stats_responsetime">response time statistics</a>
             </th>
-            <th>-</th>
+            <th>
+               <code><![CDATA[<stop-timer></stop-timer> or <stop-timer name="CCR-I"></stop-timer>]]></code>
+            </th>
           </tr>
           <tr>
             <th>
@@ -3139,6 +3142,12 @@ Command line syntax of /usr/local/bin/plotstat.ksh - options
             <th>Stop the timer for <a href="#stats_responsetime">response time statistics</a>
             </th>
             <th>-</th>
+          </tr>
+            <tr>
+            <td>&nbsp;</td>
+            <td>name</td>
+            <td>Optional. Marks client statistics with given tag. </td>
+            <td>name="&lt;tag&gt;"</td>
           </tr>
           <tr>
             <th>

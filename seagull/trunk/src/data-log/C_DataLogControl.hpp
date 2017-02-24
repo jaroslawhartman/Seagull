@@ -45,7 +45,7 @@ public:
   virtual int data (double P_time, double P_data);
 
   int time_data (struct timeval *P_begin, struct timeval *P_end);
-  
+  int time_data (struct timeval *P_begin, struct timeval *P_end, char *P_tag);  
 
 protected:
 

@@ -282,8 +282,26 @@ int C_DataLogControl::time_data(struct timeval *P_begin,
 
 }
 
+int C_DataLogControl::time_data(struct timeval *P_begin,
+				struct timeval *P_end, char *P_tag) {
 
+  // convert data to string and add a tag
 
+  double L_diff, L_time ;
+  long   L_val_sec, L_val_usec ;
+  char   L_final_string [ 100 ] ;
 
+  L_time = (double)P_end->tv_sec*1000.0 + (double)(P_end->tv_usec)/(double)1000.0 ;
+  L_time = (double)L_time - (double)m_time_ref ;
 
+  L_val_sec = P_end->tv_sec - P_begin->tv_sec ;
+  L_val_usec = P_end->tv_usec - P_begin->tv_usec ;
+  if (L_val_usec < 0) { L_val_usec += 1000000; L_val_sec --; }
 
+  L_diff = (double) L_val_sec*1000.0 + (double)(L_val_usec)/1000.0 ;
+    
+  snprintf(L_final_string, 100, (char*)"%f;%f;%s", L_time, L_diff,
+	     P_tag);   
+
+  return(data(L_final_string));
+}
